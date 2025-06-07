@@ -57,9 +57,3 @@ Run the suite with:
 ```bash
 pytest -q
 ```
-
-## Contributing
-
-1. Create a virtual environment and install dependencies with `pip install -r requirements.txt`.
-2. Format your code using `black` and run `ruff` for linting.
-3. Execute the test suite with `pytest` to ensure everything works as expected.
