@@ -1,9 +1,23 @@
 version: '3.8'
 services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ${DB_NAME:-crudex}
+      POSTGRES_USER: ${DB_USER:-crudex}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-crudexpass}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
   crudex:
     build: .
-    volumes:
-      - crudex_data:/app
+    depends_on:
+      - db
+    environment:
+      DB_NAME: ${DB_NAME:-crudex}
+      DB_USER: ${DB_USER:-crudex}
+      DB_PASSWORD: ${DB_PASSWORD:-crudexpass}
+      DB_HOST: db
+      DB_PORT: 5432
     entrypoint: ["python", "app.py"]
 volumes:
-  crudex_data:
+  postgres_data:

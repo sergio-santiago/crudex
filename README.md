@@ -1,6 +1,6 @@
 # crudex
 
-Simple command-line CRUD app using SQLite.
+Simple command-line CRUD app using PostgreSQL.
 
 ## Requirements
 
@@ -42,30 +42,19 @@ Build the image:
 docker build -t crudex .
 ```
 
-Run commands using the container (data will not persist between runs):
-
-```bash
-docker run --rm crudex add "John Doe" "john@example.com"
-docker run --rm crudex list
-```
-
-To preserve the database, mount a volume:
-
-```bash
-docker volume create crudex_data
-docker run --rm -v crudex_data:/app crudex add "Jane Doe" "jane@example.com"
-docker run --rm -v crudex_data:/app crudex list
-```
+This image is intended to run together with a PostgreSQL container defined in
+`docker-compose.yml`.
 
 ## Docker Compose
 
-Para simplificar la ejecución y conservar la base de datos puedes usar
-`docker-compose`. El servicio definido en `docker-compose.yml` monta un
-volumen llamado `crudex_data` que contiene el archivo de la base de datos.
+Para ejecutar la aplicación y la base de datos utiliza `docker compose`.
+El archivo `docker-compose.yml` define un servicio `db` con PostgreSQL y el
+servicio de la aplicación que se conecta a dicho contenedor.
 
 Construye y ejecuta comandos así:
 
 ```bash
+docker compose build
 docker compose run --rm crudex add "John Doe" "john@example.com"
 docker compose run --rm crudex list
 ```
