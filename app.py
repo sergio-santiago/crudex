@@ -13,6 +13,8 @@ class Entry:
     email: str
 
 class Database:
+    """Simple wrapper around SQLite for CRUD operations."""
+
     def __init__(self) -> None:
         self.connection = sqlite3.connect(DB_NAME)
         self.connection.row_factory = sqlite3.Row
@@ -37,6 +39,17 @@ class Database:
         rows = cursor.fetchall()
         return [Entry(id=row['id'], name=row['name'], email=row['email']) for row in rows]
 
+    def get_entry(self, entry_id: int) -> Entry | None:
+        """Return a single entry by its ID or ``None`` if not found."""
+        cursor = self.connection.execute(
+            'SELECT id, name, email FROM entries WHERE id = ?',
+            (entry_id,),
+        )
+        row = cursor.fetchone()
+        if row is None:
+            return None
+        return Entry(id=row['id'], name=row['name'], email=row['email'])
+
     def update_entry(self, entry_id: int, name: str, email: str) -> None:
         self.connection.execute(
             'UPDATE entries SET name = ?, email = ? WHERE id = ?',
@@ -59,6 +72,9 @@ def main() -> None:
 
     list_parser = subparsers.add_parser('list', help='List all entries')
 
+    get_parser = subparsers.add_parser('get', help='Get a single entry by id')
+    get_parser.add_argument('id', type=int)
+
     update_parser = subparsers.add_parser('update', help='Update an entry')
     update_parser.add_argument('id', type=int)
     update_parser.add_argument('name')
@@ -77,6 +93,12 @@ def main() -> None:
         entries = db.list_entries()
         for e in entries:
             print(e)
+    elif args.command == 'get':
+        entry = db.get_entry(args.id)
+        if entry:
+            print(entry)
+        else:
+            print('Entry not found')
     elif args.command == 'update':
         db.update_entry(args.id, args.name, args.email)
         print('Entry updated')
