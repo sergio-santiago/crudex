@@ -1,9 +1,14 @@
-import sqlite3
+import os
+import psycopg2
 from dataclasses import dataclass
-from typing import List, Tuple
+from typing import List
 import argparse
 
-DB_NAME = 'app.db'
+DB_NAME = os.getenv('DB_NAME', 'crudex')
+DB_USER = os.getenv('DB_USER', 'crudex')
+DB_PASSWORD = os.getenv('DB_PASSWORD', 'crudexpass')
+DB_HOST = os.getenv('DB_HOST', 'db')
+DB_PORT = int(os.getenv('DB_PORT', '5432'))
 
 @dataclass
 class Entry:
@@ -12,42 +17,52 @@ class Entry:
     email: str
 
 class Database:
-    def __init__(self, db_name: str = DB_NAME):
-        self.connection = sqlite3.connect(db_name)
+    def __init__(self) -> None:
+        self.connection = psycopg2.connect(
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD,
+            host=DB_HOST,
+            port=DB_PORT,
+        )
+        self.connection.autocommit = True
         self.create_table()
 
     def create_table(self) -> None:
-        cursor = self.connection.cursor()
-        cursor.execute(
-            'CREATE TABLE IF NOT EXISTS entries (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT)'
-        )
-        self.connection.commit()
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                'CREATE TABLE IF NOT EXISTS entries (id SERIAL PRIMARY KEY, name TEXT, email TEXT)'
+            )
 
     def add_entry(self, name: str, email: str) -> int:
-        cursor = self.connection.cursor()
-        cursor.execute('INSERT INTO entries (name, email) VALUES (?, ?)', (name, email))
-        self.connection.commit()
-        return cursor.lastrowid
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                'INSERT INTO entries (name, email) VALUES (%s, %s) RETURNING id',
+                (name, email),
+            )
+            entry_id = cursor.fetchone()[0]
+        return entry_id
 
     def list_entries(self) -> List[Entry]:
-        cursor = self.connection.cursor()
-        cursor.execute('SELECT id, name, email FROM entries')
-        rows = cursor.fetchall()
-        return [Entry(id=row[0], name=row[1], email=row[2]) for row in rows]
+        with self.connection.cursor() as cursor:
+            cursor.execute('SELECT id, name, email FROM entries')
+            rows = cursor.fetchall()
+            return [Entry(id=row[0], name=row[1], email=row[2]) for row in rows]
 
     def update_entry(self, entry_id: int, name: str, email: str) -> None:
-        cursor = self.connection.cursor()
-        cursor.execute('UPDATE entries SET name = ?, email = ? WHERE id = ?', (name, email, entry_id))
-        self.connection.commit()
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                'UPDATE entries SET name = %s, email = %s WHERE id = %s',
+                (name, email, entry_id),
+            )
 
     def delete_entry(self, entry_id: int) -> None:
-        cursor = self.connection.cursor()
-        cursor.execute('DELETE FROM entries WHERE id = ?', (entry_id,))
-        self.connection.commit()
+        with self.connection.cursor() as cursor:
+            cursor.execute('DELETE FROM entries WHERE id = %s', (entry_id,))
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description='Simple CRUD app with SQLite')
+    parser = argparse.ArgumentParser(description='Simple CRUD app with PostgreSQL')
     subparsers = parser.add_subparsers(dest='command')
 
     add_parser = subparsers.add_parser('add', help='Add a new entry')
