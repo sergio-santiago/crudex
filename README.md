@@ -43,17 +43,6 @@ The application stores its data in a SQLite file. By default the file is
 
 Then run with `CRUDEX_CONFIG=path/to/file.json`.
 
-### Using the CLI
-
-All commands are available through the `crudex` CLI powered by `click`:
-
-```bash
-python app.py add "Jane Doe" "jane@example.com"
-python app.py list
-python app.py get 1
-python app.py update 1 "John Doe" "john@example.com"
-python app.py delete 1
-```
 
 ## Running tests
 
