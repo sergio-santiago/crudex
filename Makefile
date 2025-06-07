@@ -9,14 +9,14 @@ list:
 	$(PYTHON) app.py list
 
 add:
-        $(PYTHON) app.py add "$(NAME)" "$(EMAIL)"
+	$(PYTHON) app.py add "$(NAME)" "$(EMAIL)"
 
 get:
-        $(PYTHON) app.py get $(ID)
+	$(PYTHON) app.py get $(ID)
 
 update:
 	$(PYTHON) app.py update $(ID) "$(NAME)" "$(EMAIL)"
 
 delete:
-        $(PYTHON) app.py delete $(ID)
+	$(PYTHON) app.py delete $(ID)
 
