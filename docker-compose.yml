@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  crudex:
+    build: .
+    volumes:
+      - crudex_data:/app
+    entrypoint: ["python", "app.py"]
+volumes:
+  crudex_data:
