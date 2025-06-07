@@ -13,7 +13,8 @@ It is designed to be lightweight, dependency-free, and easy to understand — id
 
 ## Usage
 
-You can run the application via the provided `Makefile`.
+You can run the application via the provided `Makefile`. Simply running `make`
+will launch the interactive console.
 
 ### Using the Makefile
 
