@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crudex"
+version = "0.1.0"
+description = "Minimal CLI CRUD example"
+authors = [ { name = "Example" } ]
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88

@@ -3,8 +3,8 @@
 
 ## Description
 
-`crudex` is a minimal command-line application for performing CRUD operations on a SQLite database.  
-It is designed to be lightweight, dependency-free, and easy to understand — ideal for experimenting with code generation, prototyping, or educational use.
+`crudex` is a minimal command-line application for performing CRUD operations on a SQLite database.
+It is designed to be lightweight and easy to understand — ideal for experimenting with code generation, prototyping, or educational use.
 
 ## Requirements
 
@@ -31,6 +31,30 @@ make update ID=1 NAME="Sandra Alonso" EMAIL="sandra@example.com"
 make delete ID=1
 ```
 
+### Configuration
+
+The application stores its data in a SQLite file. By default the file is
+`crudex.db`, but you can override the location using the environment variable
+`CRUDEX_DB` or by creating a small JSON file:
+
+```json
+{ "db_path": "/tmp/mydb.sqlite" }
+```
+
+Then run with `CRUDEX_CONFIG=path/to/file.json`.
+
+### Using the CLI
+
+All commands are available through the `crudex` CLI powered by `click`:
+
+```bash
+python app.py add "Jane Doe" "jane@example.com"
+python app.py list
+python app.py get 1
+python app.py update 1 "John Doe" "john@example.com"
+python app.py delete 1
+```
+
 ## Running tests
 
 Install the testing dependency (also available via `make install-dependencies`):
@@ -44,3 +68,9 @@ Run the suite with:
 ```bash
 pytest -q
 ```
+
+## Contributing
+
+1. Create a virtual environment and install dependencies with `pip install -r requirements.txt`.
+2. Format your code using `black` and run `ruff` for linting.
+3. Execute the test suite with `pytest` to ensure everything works as expected.
