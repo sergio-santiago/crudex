@@ -8,29 +8,29 @@ DB_PATH ?= crudex.db
 .PHONY: install-dependencies list add get update delete console purge
 
 install-dependencies:
-        $(PYTHON) -m pip install -r requirements.txt
+	$(PYTHON) -m pip install -r requirements.txt
 
 lint:
-        $(PYTHON) -m black .
-        $(PYTHON) -m ruff .
+	$(PYTHON) -m black .
+	$(PYTHON) -m ruff .
 
 list:
-        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py list
+	CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py list
 
 add:
-        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py add "$(NAME)" "$(EMAIL)"
+	CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py add "$(NAME)" "$(EMAIL)"
 
 get:
-        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py get $(ID)
+	CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py get $(ID)
 
 update:
-        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py update $(ID) "$(NAME)" "$(EMAIL)"
+	CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py update $(ID) "$(NAME)" "$(EMAIL)"
 
 delete:
-        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py delete $(ID)
+	CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py delete $(ID)
 
 console:
-        CRUDEX_DB=$(DB_PATH) $(PYTHON) console.py
+	CRUDEX_DB=$(DB_PATH) $(PYTHON) console.py
 
 purge:
-        rm -f $(DB_PATH)
+	rm -f $(DB_PATH)
