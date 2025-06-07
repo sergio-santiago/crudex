@@ -21,10 +21,10 @@ list:
 	$(DC) run --rm crudex list
 
 add:
-	$(DC) run --rm crudex add $(NAME) $(EMAIL)
+	$(DC) run --rm crudex add "$(NAME)" "$(EMAIL)"
 
 update:
-	$(DC) run --rm crudex update $(ID) $(NAME) $(EMAIL)
+	$(DC) run --rm crudex update $(ID) "$(NAME)" "$(EMAIL)"
 
 delete:
 	$(DC) run --rm crudex delete $(ID)
