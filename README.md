@@ -20,6 +20,7 @@ You can run the application in two ways: via the provided `Makefile`, or by runn
 ```bash
 make list
 make add NAME="Sergio Santiago" EMAIL="sergio@example.com"
+make get ID=1
 make update ID=1 NAME="Sandra Alonso" EMAIL="sandra@example.com"
 make delete ID=1
 ```
