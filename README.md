@@ -9,7 +9,7 @@ It is designed to be lightweight, dependency-free, and easy to understand — id
 ## Requirements
 
 - Python 3.11 or higher  
-- No external database server is required; it uses SQLite by default.
+- No external database server is required, it uses SQLite by default.
 
 ## Usage
 
