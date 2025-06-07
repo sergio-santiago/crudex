@@ -31,3 +31,28 @@ Delete an entry by id:
 ```bash
 python app.py delete 1
 ```
+
+## Docker
+
+If you don't have Python installed, you can run the application in a container.
+
+Build the image:
+
+```bash
+docker build -t crudex .
+```
+
+Run commands using the container (data will not persist between runs):
+
+```bash
+docker run --rm crudex add "John Doe" "john@example.com"
+docker run --rm crudex list
+```
+
+To preserve the database, mount a volume:
+
+```bash
+docker volume create crudex_data
+docker run --rm -v crudex_data:/app crudex add "Jane Doe" "jane@example.com"
+docker run --rm -v crudex_data:/app crudex list
+```
