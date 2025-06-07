@@ -29,7 +29,7 @@ make console
 
 ## Running tests
 
-Install the testing dependency:
+Install the testing dependency (also available via `make install-dependencies`):
 
 ```bash
 python3 -m pip install -r requirements.txt
