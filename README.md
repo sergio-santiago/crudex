@@ -1,60 +1,47 @@
 # crudex
 
-Simple command-line CRUD app using PostgreSQL.
+Aplicación de línea de comandos para realizar operaciones CRUD utilizando PostgreSQL. Puedes ejecutarla de forma local con Python o mediante contenedores Docker.
 
-## Requirements
+## Requisitos
 
-- Python 3
+- Docker y Docker Compose
+- Python 3 (solo si deseas ejecutar la aplicación sin Docker)
 
-## Usage
+## Build y puesta en marcha del servicio
 
-Initialize the database and add a new entry:
-
-```bash
-python app.py add "John Doe" "john@example.com"
-```
-
-List all entries:
-
-```bash
-python app.py list
-```
-
-Update an entry by id:
-
-```bash
-python app.py update 1 "Jane Doe" "jane@example.com"
-```
-
-Delete an entry by id:
-
-```bash
-python app.py delete 1
-```
-
-## Docker
-
-If you don't have Python installed, you can run the application in a container.
-
-Build the image:
-
-```bash
-docker build -t crudex .
-```
-
-This image is intended to run together with a PostgreSQL container defined in
-`docker-compose.yml`.
-
-## Docker Compose
-
-Para ejecutar la aplicación y la base de datos utiliza `docker compose`.
-El archivo `docker-compose.yml` define un servicio `db` con PostgreSQL y el
-servicio de la aplicación que se conecta a dicho contenedor.
-
-Construye y ejecuta comandos así:
+1. Construye la imagen de la aplicación y el contenedor de base de datos:
 
 ```bash
 docker compose build
-docker compose run --rm crudex add "John Doe" "john@example.com"
+```
+
+2. Inicia los servicios en segundo plano:
+
+```bash
+docker compose up -d
+```
+
+## Entrar al contenedor para ejecutar comandos
+
+Abre un shell dentro del contenedor de la aplicación:
+
+```bash
+docker compose run --rm crudex bash
+```
+
+Dentro del contenedor puedes usar los siguientes comandos de ejemplo:
+
+```bash
+python app.py add "John Doe" "john@example.com"
+python app.py list
+python app.py update 1 "Jane Doe" "jane@example.com"
+python app.py delete 1
+```
+
+## Ejecutar comandos sin entrar al contenedor
+
+Si prefieres lanzar un comando directamente, utiliza `docker compose run`:
+
+```bash
 docker compose run --rm crudex list
 ```
