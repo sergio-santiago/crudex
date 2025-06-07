@@ -1,5 +1,5 @@
 PYTHON := python3
-DB_NAME ?= crudex.db
+DB_PATH ?= crudex.db
 
 # Run the interactive console by default
 .DEFAULT_GOAL := console
@@ -8,25 +8,29 @@ DB_NAME ?= crudex.db
 .PHONY: install-dependencies list add get update delete console purge
 
 install-dependencies:
-	$(PYTHON) -m pip install -r requirements.txt
+        $(PYTHON) -m pip install -r requirements.txt
+
+lint:
+        $(PYTHON) -m black .
+        $(PYTHON) -m ruff .
 
 list:
-	$(PYTHON) app.py list
+        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py list
 
 add:
-	$(PYTHON) app.py add "$(NAME)" "$(EMAIL)"
+        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py add "$(NAME)" "$(EMAIL)"
 
 get:
-	$(PYTHON) app.py get $(ID)
+        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py get $(ID)
 
 update:
-	$(PYTHON) app.py update $(ID) "$(NAME)" "$(EMAIL)"
+        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py update $(ID) "$(NAME)" "$(EMAIL)"
 
 delete:
-	$(PYTHON) app.py delete $(ID)
+        CRUDEX_DB=$(DB_PATH) $(PYTHON) app.py delete $(ID)
 
 console:
-	$(PYTHON) console.py
+        CRUDEX_DB=$(DB_PATH) $(PYTHON) console.py
 
 purge:
-	rm -f $(DB_NAME)
+        rm -f $(DB_PATH)
