@@ -1,5 +1,8 @@
 PYTHON := python3
 
+# Run the interactive console by default
+.DEFAULT_GOAL := console
+
 .PHONY: install list add get update delete console
 
 install:
