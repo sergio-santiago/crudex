@@ -27,10 +27,10 @@ make delete ID=1
 
 ## Running tests
 
-Install pytest if it is not available:
+Install the testing dependency:
 
 ```bash
-python3 -m pip install pytest
+python3 -m pip install -r requirements.txt
 ```
 
 Run the suite with:
