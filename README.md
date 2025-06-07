@@ -23,12 +23,3 @@ make add NAME="Sergio Santiago" EMAIL="sergio@example.com"
 make update ID=1 NAME="Sandra Alonso" EMAIL="sandra@example.com"
 make delete ID=1
 ```
-
-Manual Usage
-
-```bash
-python app.py list
-python app.py add "Sergio Santiago" "sergio@example.com"
-python app.py update 1 "Sandra Alonso" "sandra@example.com"
-python app.py delete 1
-```
