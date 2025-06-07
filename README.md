@@ -13,7 +13,7 @@ It is designed to be lightweight, dependency-free, and easy to understand — id
 
 ## Usage
 
-You can run the application in two ways: via the provided `Makefile`, or by running the Python scripts directly.
+You can run the application via the provided `Makefile`.
 
 ### Using the Makefile
 
@@ -24,12 +24,6 @@ make get ID=1
 make update ID=1 NAME="Sandra Alonso" EMAIL="sandra@example.com"
 make delete ID=1
 make console
-```
-
-### Running the console manually
-
-```bash
-python3 console.py
 ```
 
 ## Running tests
