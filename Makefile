@@ -3,9 +3,10 @@ PYTHON := python3
 # Run the interactive console by default
 .DEFAULT_GOAL := console
 
-.PHONY: install list add get update delete console
 
-install:
+.PHONY: install-dependencies list add get update delete console
+
+install-dependencies:
 	$(PYTHON) -m pip install -r requirements.txt
 
 list:
