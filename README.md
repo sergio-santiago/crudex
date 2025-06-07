@@ -16,7 +16,7 @@ It is designed to be lightweight, dependency-free, and easy to understand — id
 You can run the application via the provided `Makefile`. Simply running `make`
 will launch the interactive console.
 
-### Using the Makefile
+### Comandos de consola
 
 ```bash
 make list
@@ -25,6 +25,14 @@ make get ID=1
 make update ID=1 NAME="Sandra Alonso" EMAIL="sandra@example.com"
 make delete ID=1
 make console
+make purge
+```
+
+### Comandos manuales
+
+```bash
+python app.py list
+python app.py add "Name" "email@example.com"
 ```
 
 ## Running tests
