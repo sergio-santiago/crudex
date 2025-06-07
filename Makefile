@@ -18,8 +18,8 @@ update:
 	$(PYTHON) app.py update $(ID) "$(NAME)" "$(EMAIL)"
 
 delete:
-        $(PYTHON) app.py delete $(ID)
+	$(PYTHON) app.py delete $(ID)
 
 console:
-        $(PYTHON) console.py
+	$(PYTHON) console.py
 
