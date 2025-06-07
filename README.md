@@ -56,3 +56,16 @@ docker volume create crudex_data
 docker run --rm -v crudex_data:/app crudex add "Jane Doe" "jane@example.com"
 docker run --rm -v crudex_data:/app crudex list
 ```
+
+## Docker Compose
+
+Para simplificar la ejecución y conservar la base de datos puedes usar
+`docker-compose`. El servicio definido en `docker-compose.yml` monta un
+volumen llamado `crudex_data` que contiene el archivo de la base de datos.
+
+Construye y ejecuta comandos así:
+
+```bash
+docker compose run --rm crudex add "John Doe" "john@example.com"
+docker compose run --rm crudex list
+```
