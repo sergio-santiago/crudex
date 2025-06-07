@@ -1,31 +1,18 @@
-DC = docker compose
+PYTHON := python3
 
-.PHONY: build up down clean shell add list update delete
+.PHONY: install list add update delete
 
-build:
-	$(DC) build
-
-up:
-	$(DC) up -d
-
-down:
-	$(DC) down
-
-clean:
-	$(DC) down -v
-
-shell:
-	$(DC) run --rm --entrypoint bash crudex
+install:
+	$(PYTHON) -m pip install -r requirements.txt
 
 list:
-	$(DC) run --rm crudex list
+	$(PYTHON) app.py list
 
 add:
-	$(DC) run --rm crudex add "$(NAME)" "$(EMAIL)"
+	$(PYTHON) app.py add "$(NAME)" "$(EMAIL)"
 
 update:
-	$(DC) run --rm crudex update $(ID) "$(NAME)" "$(EMAIL)"
+	$(PYTHON) app.py update $(ID) "$(NAME)" "$(EMAIL)"
 
 delete:
-	$(DC) run --rm crudex delete $(ID)
-
+	$(PYTHON) app.py delete $(ID)
