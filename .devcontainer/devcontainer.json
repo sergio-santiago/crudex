@@ -1,0 +1,8 @@
+{
+  "name": "Crudex Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "docker-in-docker": "latest"
+  },
+  "customInstructions": "Resp\u00f3ndeme siempre en espa\u00f1ol, pero genera el c\u00f3digo en ingl\u00e9s, con nombres de variables, funciones y comentarios tambi\u00e9n en ingl\u00e9s."
+}
