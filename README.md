@@ -23,3 +23,17 @@ make add NAME="Sergio Santiago" EMAIL="sergio@example.com"
 make update ID=1 NAME="Sandra Alonso" EMAIL="sandra@example.com"
 make delete ID=1
 ```
+
+## Running tests
+
+Install pytest if it is not available:
+
+```bash
+python3 -m pip install pytest
+```
+
+Run the suite with:
+
+```bash
+pytest -q
+```
