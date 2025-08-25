@@ -43,7 +43,6 @@ The application stores its data in a SQLite file. By default the file is
 
 Then run with `CRUDEX_CONFIG=path/to/file.json`.
 
-
 ## Running tests
 
 Install the testing dependency (also available via `make install-dependencies`):
