@@ -1,4 +1,6 @@
 # Crudex
+[![CI](https://github.com/sergio-santiago/crudex/actions/workflows/python-app.yml/badge.svg)](https://github.com/sergio-santiago/crudex/actions/workflows/python-app.yml)
+
 > 🧪 This project is experimental and intended for testing AI-assisted code generation using OpenAI Codex.  
 
 ## Description
