@@ -5,10 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "crudex"
 version = "0.1.0"
-description = "Minimal CLI CRUD example"
-authors = [ { name = "Example" } ]
+description = "Experimental Python CRUD CLI over SQLite, built to probe OpenAI Codex code generation"
 requires-python = ">=3.11"
 readme = "README.md"
+authors = [{ name = "Sergio Santiago Henares", email = "sersanhen@gmail.com" }]
+license = { text = "MIT" }
 
 [tool.black]
 line-length = 88
